@@ -44,12 +44,19 @@ data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpGreaterThanEqual : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpFuncCall: Exp vEnv (s,t) s -> Exp vEnv (s,t) t
 
+--The FunDecl record is used to represent function declarations in the language
 record FunDecl where
   constructor MkFunDecl
   fd_var_type: TyExp
   fd_return_type: TyExp
   body: Exp [fd_var_type] (fd_var_type, fd_return_type) fd_return_type
 
+{-
+A program is a sequence of instructions that perform a specific task or computation. It is a self-contained unit of functionality that can be executed by the language interpreter or compiler.
+The main expression of a program is the expression that defines the computation or task that the program is intended to perform. This is stored in the op_mainExp field for OpenProgram and the p_mainExp field for Program.
+-}
+
+--OpenProgram record represent an open program, which is a program that can take a variable as an argument
 record OpenProgram where
   constructor MkOpenProgram
   op_funDecl : FunDecl
@@ -58,6 +65,7 @@ record OpenProgram where
   val_arg : Val op_arg_type
   op_mainExp : Exp [op_arg_type] (op_funDecl.fd_var_type, op_funDecl.fd_return_type) op_return_type
 
+--Program record is used to represent a closed program, which is a program that does not take any variables as arguments
 record Program where
   constructor MkProgram
   p_funDecl: FunDecl
@@ -76,6 +84,7 @@ lookupVar : HasTypeVar i lcontex t -> VarEnv lcontex -> Val t
 lookupVar StopVar (x :: xs) = x
 lookupVar (PopVar k) (x :: xs) = lookupVar k xs
 
+--The evalOpenProg function takes an open program represented as an OpenProgram record and a value of the appropriate type as its arguments, and returns the result of evaluating the main expression of the open program with the given value as the argument.
 evalOpenProg : (op: OpenProgram) -> Val op.op_return_type
 evalOpenProg (MkOpenProgram op_funDecl op_return_type op_arg_type val_arg (ExpVar x)) = lookupVar x (val_arg :: Nil)
 evalOpenProg (MkOpenProgram op_funDecl Tint op_arg_type val_arg (ExpVal x)) = x
@@ -100,7 +109,8 @@ evalOpenProg (MkOpenProgram op_funDecl (op_funDecl.fd_return_type) op_arg_type v
                       ) 
                     ) op_funDecl.body
                 ) 
-              
+
+--The evalProg function takes a closed program represented as a Program record and returns the result of evaluating the main expression of the closed program.
 evalProg : (p: Program) -> Val p.p_return_type
 evalProg (MkProgram _ _ (ExpVar StopVar)) impossible
 evalProg (MkProgram _ _ (ExpVar (PopVar x))) impossible
