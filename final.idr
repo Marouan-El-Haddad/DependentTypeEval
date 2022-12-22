@@ -30,6 +30,8 @@ data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpGreaterThan : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpGreaterThanEqual : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpFuncCall: Exp vEnv (s,t) s -> Exp vEnv (s,t) t
+--start med at skrive med simple programmer, og udvikle det mere
+-- når man har variabler er dependent types mest relevant
 
 record FunDecl where
   constructor MkFunDecl
@@ -113,7 +115,7 @@ evalProg (MkProgram p_funDecl (p_funDecl.fd_return_type) (ExpFuncCall x))
                   )
 
 ----------------------------------------------------------------------------------------
---test using evalOpenProg
+--examples of using evalOpenProg and evalProg
 
 -- Define a function that adds two integers
 add : FunDecl
@@ -159,8 +161,39 @@ prog5 : OpenProgram
 prog5 = MkOpenProgram isGreaterThanTen2 Tbool Tint 12 (ExpGreaterThan (ExpVal 12) (ExpVal 10))
 
 
+
+-- Define a function that returns the nth fibonacci number
+fib : FunDecl
+fib = MkFunDecl Tint Tint (ExpIfThenElse (ExpLessThan (ExpVar (StopVar)) (ExpVal 2))
+                                         (ExpVar (StopVar))
+                                         (ExpAddition (ExpFuncCall (ExpSubtraction (ExpVar (StopVar)) (ExpVal 1)))
+                                                      (ExpFuncCall (ExpSubtraction (ExpVar (StopVar)) (ExpVal 2)))))
+
+-- Create an OpenProgram value that includes the fib function and the necessary return type
+fibProg : OpenProgram
+fibProg = MkOpenProgram fib Tint Tint 6 (ExpFuncCall (ExpVar (StopVar)))
+
+
+-- Create a Program value that includes the fib function and the necessary return type
+fibProg' : Program
+fibProg' = MkProgram fib Tint (ExpFuncCall (ExpVal 6))
+
+-- Define a function that returns the factorial of an integer
+fact : FunDecl
+fact = MkFunDecl Tint Tint (ExpIfThenElse (ExpLessThanEqual (ExpVar (StopVar)) (ExpVal 1))
+                                          (ExpVal 1)
+                                          (ExpMultiplication (ExpVar (StopVar)) (ExpFuncCall (ExpSubtraction (ExpVar (StopVar)) (ExpVal 1)))))
+
+-- Create a Program value that includes the fact function and the necessary return type
+factProg : Program
+factProg = MkProgram fact Tint (ExpFuncCall (ExpVal 10))
+
+
 --evalOpenProg prog1
 --evalOpenProg prog2
 --evalOpenProg prog3
 --evalOpenProg prog4
 --evalOpenProg prog5
+--evalOpenProg fibProg
+--evalProg fibProg'
+--evalProg factProg
