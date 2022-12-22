@@ -18,11 +18,10 @@ data HasTypeVar : (i : Fin n) -> Vect n TyExp -> TyExp -> Type where
     StopVar : HasTypeVar FZ (tVar :: vcntxt) tVar 
     PopVar  : HasTypeVar kFin vcntxt tVar 
            -> HasTypeVar (FS kFin) (uVar :: vcntxt) tVar
---I can treat Stop as a proof that the most recently defined variable is well-typed, 
---and Pop n as a proof that, if the nth most recently defined variable is well-typed, 
+--I can treat StopVar as a proof that the most recently defined variable is well-typed, 
+--and PopVar n as a proof that, if the nth most recently defined variable is well-typed, 
 --so is the n+1th. In practice, this means I use Stop to refer to the most recently defined variable, 
---Pop Stop to refer to the next, and so on, via the Var constructor
-
+--PopVar StopVar to refer to the next, and so on, via the Var constructor
            
 --This defines a new data type called Exp, which represents expressions in the language. 
 --It takes three arguments: a vector of type expressions Vect n TyExp representing the type environment, 
