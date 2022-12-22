@@ -23,7 +23,7 @@ data HasTypeVar : (i : Fin n) -> Vect n TyExp -> TyExp -> Type where
 --so is the n+1th. In practice, this means I use Stop to refer to the most recently defined variable, 
 --PopVar StopVar to refer to the next, and so on, via the Var constructor
 
---the Exp data type is used to represent expressions in your language. Expressions are syntactic constructs that represent a computation or task to be performed. 
+--the Exp data type is used to represent expressions in the language. Expressions are syntactic constructs that represent a computation or task to be performed. 
 --The Exp data type is defined as a dependent type, which means that its type depends on other values. In this case, the Exp type depends on a vector of type expressions Vect n TyExp representing the type environment, a pair of type expressions (TyExp, TyExp) representing the function environment, and a type expression TyExp representing the type of the expression.
 data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpVar : HasTypeVar iFin vEnv t -> Exp vEnv fEnv t
