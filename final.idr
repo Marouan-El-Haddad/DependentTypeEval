@@ -11,17 +11,22 @@ Val : TyExp -> Type
 Val Tint = Int
 Val Tbool = Bool
 
--- HasTypeVar is a type level function that takes a Fin n, a Vect n TyExp, and a TyExp
--- and returns a Type. It is used to check if a variable with the given type exists in the
--- given Vect n TyExp.
+--I use a nameless representation for variables — they are de Bruijn indexed. 
+--Variables are represented by a proof of their membership in the cntxt, 
+--HasType i cntxt T, which is a proof that variable i in cntxt cntxt has type T. This is defined as follows:
 data HasTypeVar : (i : Fin n) -> Vect n TyExp -> TyExp -> Type where
     StopVar : HasTypeVar FZ (tVar :: vcntxt) tVar 
     PopVar  : HasTypeVar kFin vcntxt tVar 
            -> HasTypeVar (FS kFin) (uVar :: vcntxt) tVar
+--I can treat Stop as a proof that the most recently defined variable is well-typed, 
+--and Pop n as a proof that, if the nth most recently defined variable is well-typed, 
+--so is the n+1th. In practice, this means I use Stop to refer to the most recently defined variable, 
+--Pop Stop to refer to the next, and so on, via the Var constructor
+
            
--- Exp is a type level function that takes a Vect n TyExp, a tuple of two TyExp, and a TyExp,
--- and returns a Type. It represents an expression in the language, which may have variables
--- with types specified in the Vect n TyExp and may have a function type specified in the tuple.
+--This defines a new data type called Exp, which represents expressions in the language. 
+--It takes three arguments: a vector of type expressions Vect n TyExp representing the type environment, 
+--a pair of type expressions (TyExp, TyExp) representing the function environment, and a type expression TyExp representing the type of the expression.
 data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpVar : HasTypeVar iFin vEnv t -> Exp vEnv fEnv t
   ExpVal : (x : Int) -> Exp vEnv fEnv Tint
@@ -40,8 +45,7 @@ data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpGreaterThanEqual : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpFuncCall: Exp vEnv (s,t) s -> Exp vEnv (s,t) t
 
--- FunDecl represents a function declaration, which includes the type of the function's
--- variable, the return type of the function, and the body of the function.
+
 record FunDecl where
   constructor MkFunDecl
   fd_var_type: TyExp
@@ -63,12 +67,14 @@ record Program where
   p_return_type: TyExp
   p_mainExp: Exp [] (p_funDecl.fd_var_type, p_funDecl.fd_return_type) p_return_type
 
+--This declares a data type called VarEnv that takes a value of the type Vect n TyExp and represents a variable environment:
 data VarEnv : Vect n TyExp -> Type where
     Nil  : VarEnv Nil
     (::) : Val a 
             -> VarEnv ecntxt 
             -> VarEnv (a :: ecntxt)
 
+--This is a function that takes a value of the type HasTypeVar i lcontex t and a value of the type VarEnv lcontex, and returns a value of the type Val t. The function looks up the value of the variable in the given environment using the HasTypeVar value.
 lookupVar : HasTypeVar i lcontex t -> VarEnv lcontex -> Val t
 lookupVar StopVar (x :: xs) = x
 lookupVar (PopVar k) (x :: xs) = lookupVar k xs
