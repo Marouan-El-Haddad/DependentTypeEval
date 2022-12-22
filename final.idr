@@ -30,8 +30,6 @@ data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpGreaterThan : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpGreaterThanEqual : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpFuncCall: Exp vEnv (s,t) s -> Exp vEnv (s,t) t
---start med at skrive med simple programmer, og udvikle det mere
--- når man har variabler er dependent types mest relevant
 
 record FunDecl where
   constructor MkFunDecl
