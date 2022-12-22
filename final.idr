@@ -44,13 +44,11 @@ data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpGreaterThanEqual : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpFuncCall: Exp vEnv (s,t) s -> Exp vEnv (s,t) t
 
-
 record FunDecl where
   constructor MkFunDecl
   fd_var_type: TyExp
   fd_return_type: TyExp
   body: Exp [fd_var_type] (fd_var_type, fd_return_type) fd_return_type
-
 
 record OpenProgram where
   constructor MkOpenProgram
