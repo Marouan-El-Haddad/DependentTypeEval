@@ -1,18 +1,27 @@
 import Data.Vect
 
+-- TyExp represents the type of an expression
 data TyExp
     = Tint
     | Tbool
 
+-- Val is a type level function that takes a TyExp and returns a Type.
+-- It maps Tint to Int and Tbool to Bool.
 Val : TyExp -> Type
 Val Tint = Int
 Val Tbool = Bool
 
+-- HasTypeVar is a type level function that takes a Fin n, a Vect n TyExp, and a TyExp
+-- and returns a Type. It is used to check if a variable with the given type exists in the
+-- given Vect n TyExp.
 data HasTypeVar : (i : Fin n) -> Vect n TyExp -> TyExp -> Type where
     StopVar : HasTypeVar FZ (tVar :: vcntxt) tVar 
     PopVar  : HasTypeVar kFin vcntxt tVar 
            -> HasTypeVar (FS kFin) (uVar :: vcntxt) tVar
-
+           
+-- Exp is a type level function that takes a Vect n TyExp, a tuple of two TyExp, and a TyExp,
+-- and returns a Type. It represents an expression in the language, which may have variables
+-- with types specified in the Vect n TyExp and may have a function type specified in the tuple.
 data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpVar : HasTypeVar iFin vEnv t -> Exp vEnv fEnv t
   ExpVal : (x : Int) -> Exp vEnv fEnv Tint
@@ -31,11 +40,14 @@ data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpGreaterThanEqual : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpFuncCall: Exp vEnv (s,t) s -> Exp vEnv (s,t) t
 
+-- FunDecl represents a function declaration, which includes the type of the function's
+-- variable, the return type of the function, and the body of the function.
 record FunDecl where
   constructor MkFunDecl
   fd_var_type: TyExp
   fd_return_type: TyExp
   body: Exp [fd_var_type] (fd_var_type, fd_return_type) fd_return_type
+
 
 record OpenProgram where
   constructor MkOpenProgram
