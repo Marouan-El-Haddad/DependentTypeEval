@@ -276,70 +276,70 @@ isOdd = MkFunDecl Tint Tbool (ExpIfThenElse (ExpLessThan (ExpVar (StopVar)) (Exp
 
 ---------------------Programs---------------------
 
--- Create a Program that includes the add function and the necessary return type
+--A program that includes the add function and the necessary return type
 prog1_add1 : Program
 prog1_add1 = MkProgram Addition1 Tint (ExpFuncCall (ExpVal 3)) --103
 
 prog2_add1 : Program
 prog2_add1 = MkProgram Addition1 Tint (ExpFuncCall (ExpVal 0)) --100
 
--- Create a Program that includes the sub function and the necessary return type
+--A program that includes the sub function and the necessary return type
 prog1_sub1 : Program
 prog1_sub1 = MkProgram Subtraction1 Tint (ExpFuncCall (ExpVal 3)) -- -97
 
 prog2_sub1 : Program
 prog2_sub1 = MkProgram Subtraction1 Tint (ExpFuncCall (ExpVal 0)) -- -100
 
--- Create a Program that includes the mul function and the necessary return type
+--A program that includes the mul function and the necessary return type
 prog1_mul1 : Program
 prog1_mul1 = MkProgram Multiplication1 Tint (ExpFuncCall (ExpVal 3)) --300
 
 prog2_mul1 : Program
 prog2_mul1 = MkProgram Multiplication1 Tint (ExpFuncCall (ExpVal 0)) --0
 
--- Create a Program that includes the if then else function (less than) and the necessary return type
+--A program that includes the if then else function (less than) and the necessary return type
 prog1_IfThenElseLT : Program
 prog1_IfThenElseLT = MkProgram IfThenElseLT Tint (ExpFuncCall (ExpVal 300)) --200
 
 prog2_IfThenElseLT : Program
 prog2_IfThenElseLT = MkProgram IfThenElseLT Tint (ExpFuncCall (ExpVal 0)) --100
 
--- Create a Program that includes the if then else function (less than equal) and the necessary return type
+--A program that includes the if then else function (less than equal) and the necessary return type
 prog1_IfThenElseLTE : Program
 prog1_IfThenElseLTE = MkProgram IfThenElseLTE Tint (ExpFuncCall (ExpVal 300)) --200
 
 prog2_IfThenElseLTE : Program
 prog2_IfThenElseLTE = MkProgram IfThenElseLTE Tint (ExpFuncCall (ExpVal 0)) --100
 
--- Create a Program that includes the if then else function (greater than) and the necessary return type
+--A program that includes the if then else function (greater than) and the necessary return type
 prog1_IfThenElseGT : Program
 prog1_IfThenElseGT = MkProgram IfThenElseGT Tint (ExpFuncCall (ExpVal 300)) --100
 
 prog2_IfThenElseGT : Program
 prog2_IfThenElseGT = MkProgram IfThenElseGT Tint (ExpFuncCall (ExpVal 0)) --200
 
--- Create a Program that includes the if then else function (greater than equal) and the necessary return type
+--A program that includes the if then else function (greater than equal) and the necessary return type
 prog1_IfThenElseGTE : Program
 prog1_IfThenElseGTE = MkProgram IfThenElseGTE Tint (ExpFuncCall (ExpVal 300)) --100
 
 prog2_IfThenElseGTE : Program
 prog2_IfThenElseGTE = MkProgram IfThenElseGTE Tint (ExpFuncCall (ExpVal 0)) --200
 
--- Create a Program that includes the if then else function (equal) and the necessary return type
+--A program that includes the if then else function (equal) and the necessary return type
 prog1_IfThenElseEQ : Program
 prog1_IfThenElseEQ = MkProgram IfThenElseEQ Tint (ExpFuncCall (ExpVal 300)) --200
 
 prog2_IfThenElseEQ : Program
 prog2_IfThenElseEQ = MkProgram IfThenElseEQ Tint (ExpFuncCall (ExpVal 200)) --200
 
--- Create a Program that includes the if then else function (not equal) and the necessary return type
+--A program that includes the if then else function (not equal) and the necessary return type
 prog1_IfThenElseNEQ : Program
 prog1_IfThenElseNEQ = MkProgram IfThenElseNEQ Tint (ExpFuncCall (ExpVal 300)) --100
 
 prog2_IfThenElseNEQ : Program
 prog2_IfThenElseNEQ = MkProgram IfThenElseNEQ Tint (ExpFuncCall (ExpVal 200)) --100
 
--- Create a Program value that includes the isEven function and the necessary return type
+--A program that includes the isEven function and the necessary return type
 prog1_isEven : Program
 prog1_isEven = MkProgram isEven Tbool (ExpFuncCall (ExpVal 7)) --false
 
@@ -352,7 +352,7 @@ prog3_isEven = MkProgram isEven Tbool (ExpFuncCall (ExpVal (-7))) --false
 prog4_isEven : Program
 prog4_isEven = MkProgram isEven Tbool (ExpFuncCall (ExpVal (-8))) --true
 
--- Create a Program value that includes the isOdd function and the necessary return type
+--A program that includes the isOdd function and the necessary return type
 prog1_isOdd : Program
 prog1_isOdd = MkProgram isOdd Tbool (ExpFuncCall (ExpVal 7)) --true
 
@@ -365,62 +365,62 @@ prog3_isOdd = MkProgram isOdd Tbool (ExpFuncCall (ExpVal (-7))) --true
 prog4_isOdd : Program
 prog4_isOdd = MkProgram isOdd Tbool (ExpFuncCall (ExpVal (-8))) --false
 
--- Create a Program value that includes the fib function and the necessary return type
+--A program that includes the fib function and the necessary return type
 prog1_fib : Program
 prog1_fib = MkProgram fib Tint (ExpFuncCall (ExpVal 6)) --8
 
--- Create a Program value that includes the fact function and the necessary return type
+--A program that includes the fact function and the necessary return type
 prog1_factorial : Program
 prog1_factorial = MkProgram fact Tint (ExpFuncCall (ExpVal 10)) --3628800
 
 ---------------------OpenPrograms---------------------
 
--- Create an OpenProgram value that includes the add function and the necessary return type
+--An OpenProg that includes the add function and the necessary return type
 openprog1_add1 : OpenProgram
-openprog1_add1 = MkOpenProgram Addition1 Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --103
+openprog1_add1 = MkOpenProgram Addition1 Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --200
 
 openprog1_add2 : OpenProgram
 openprog1_add2 = MkOpenProgram Addition2 Tint Tint 20 (ExpFuncCall (ExpVar (StopVar))) --120
 
--- Create an OpenProgram value that includes the sub function and the necessary return type
+--An OpenProg that includes the sub function and the necessary return type
 openprog1_sub1 : OpenProgram
 openprog1_sub1 = MkOpenProgram Subtraction1 Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --97
 
 openprog1_sub2 : OpenProgram
 openprog1_sub2 = MkOpenProgram Subtraction2 Tint Tint 20 (ExpFuncCall (ExpVar (StopVar))) --80
 
--- Create an OpenProgram value that includes the mult function and the necessary return type
+--An OpenProg that includes the mult function and the necessary return type
 openprog1_mult1 : OpenProgram
 openprog1_mult1 = MkOpenProgram Multiplication1 Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --10000
 
 openprog1_mult2 : OpenProgram
 openprog1_mult2 = MkOpenProgram Multiplication2 Tint Tint 20 (ExpFuncCall (ExpVar (StopVar))) --400
 
--- Create an OpenProgram value that includes the IfThenElseLT function and the necessary return type
+--An OpenProg that includes the IfThenElseLT function and the necessary return type
 openprog1_IfThenElseLT : OpenProgram
 openprog1_IfThenElseLT = MkOpenProgram IfThenElseLT Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --100
 
--- Create an OpenProgram value that includes the IfThenElseLTE function and the necessary return type
+--An OpenProg that includes the IfThenElseLTE function and the necessary return type
 openprog1_IfThenElseLTE : OpenProgram
 openprog1_IfThenElseLTE = MkOpenProgram IfThenElseLTE Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --100
 
--- Create an OpenProgram value that includes the IfThenElseGT function and the necessary return type
+--An OpenProg that includes the IfThenElseGT function and the necessary return type
 openprog1_IfThenElseGT : OpenProgram
 openprog1_IfThenElseGT = MkOpenProgram IfThenElseGT Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --100
 
--- Create an OpenProgram value that includes the IfThenElseGTE function and the necessary return type
+--An OpenProg that includes the IfThenElseGTE function and the necessary return type
 openprog1_IfThenElseGTE : OpenProgram
 openprog1_IfThenElseGTE = MkOpenProgram IfThenElseGTE Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --100
 
--- Create an OpenProgram value that includes the IfThenElseEQ function and the necessary return type
+--An OpenProg that includes the IfThenElseEQ function and the necessary return type
 openprog1_IfThenElseEQ : OpenProgram
 openprog1_IfThenElseEQ = MkOpenProgram IfThenElseEQ Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --100
 
--- Create an OpenProgram value that includes the IfThenElseNEQ function and the necessary return type
+--An OpenProg that includes the IfThenElseNEQ function and the necessary return type
 openprog1_IfThenElseNEQ : OpenProgram
 openprog1_IfThenElseNEQ = MkOpenProgram IfThenElseNEQ Tint Tint 100 (ExpFuncCall (ExpVar (StopVar))) --100
 
--- Create an OpenProgram value that includes the isEven function and the necessary return type
+--An OpenProg that includes the isEven function and the necessary return type
 openprog1_isEven : OpenProgram
 openprog1_isEven = MkOpenProgram isEven Tbool Tint 7 (ExpFuncCall (ExpVar (StopVar))) --false
 
@@ -433,7 +433,7 @@ openprog3_isEven = MkOpenProgram isEven Tbool Tint (-7) (ExpFuncCall (ExpVar (St
 openprog4_isEven : OpenProgram
 openprog4_isEven = MkOpenProgram isEven Tbool Tint (-8) (ExpFuncCall (ExpVar (StopVar))) --true
 
--- Create an OpenProgram value that includes the isOdd function and the necessary return type
+--An OpenProg that includes the isOdd function and the necessary return type
 openprog1_isOdd : OpenProgram
 openprog1_isOdd = MkOpenProgram isOdd Tbool Tint 7 (ExpFuncCall (ExpVar (StopVar))) --true
 
@@ -446,84 +446,84 @@ openprog3_isOdd = MkOpenProgram isOdd Tbool Tint (-7) (ExpFuncCall (ExpVar (Stop
 openprog4_isOdd : OpenProgram
 openprog4_isOdd = MkOpenProgram isOdd Tbool Tint (-8) (ExpFuncCall (ExpVar (StopVar))) --false
 
--- Create an OpenProgram value that includes the fib function and the necessary return type
+--An OpenProg that includes the fib function and the necessary return type
 openprog1_fib : OpenProgram
 openprog1_fib = MkOpenProgram fib Tint Tint 6 (ExpFuncCall (ExpVar (StopVar))) --8
 
--- Create an OpenProgram value that includes the fact function and the necessary return type
+--An OpenProg that includes the fact function and the necessary return type
 openprog1_fact : OpenProgram
 openprog1_fact = MkOpenProgram fact Tint Tint 5 (ExpFuncCall (ExpVar (StopVar))) --120
 
--- Create an OpenProgram value that includes the squareOrInput function and the necessary return type
+--An OpenProg that includes the squareOrInput function and the necessary return type
 openprog1_squareOrInput : OpenProgram
 openprog1_squareOrInput = MkOpenProgram squareOrInput Tint Tint 1 (ExpIfThenElse (ExpGreaterThan (ExpVal 2) (ExpVal 1)) (ExpMultiplication (ExpVal 2) (ExpVal 2)) (ExpVal 1))
 
 ---------------------Tests program---------------------
 
--- Write a test that sees if the evaluation of the Program prog1_add1 works as expected
+-- Test that checks if the evaluation of the Program prog1_add1 works as expected
 test_prog1_add1 : So (evalProg CompNoCom.prog1_add1 == 103)
 test_prog1_add1 = Oh
 
 test_prog1_add2 : So (evalProg CompNoCom.prog2_add1 == 100)
 test_prog1_add2 = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_sub1 works as expected
+-- Test that checks if the evaluation of the Program prog1_sub1 works as expected
 test_prog1_sub1 : So (evalProg CompNoCom.prog1_sub1 == -97)
 test_prog1_sub1 = Oh
 
 test_prog2_sub1 : So (evalProg CompNoCom.prog2_sub1 == -100)
 test_prog2_sub1 = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_mul1 works as expected
+-- Test that checks if the evaluation of the Program prog1_mul1 works as expected
 test_prog1_mult1 : So (evalProg CompNoCom.prog1_mul1 == 300)
 test_prog1_mult1 = Oh
 
 test_prog2_mult1 : So (evalProg CompNoCom.prog2_mul1 == 0)
 test_prog2_mult1 = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_IfThenElseLT works as expected
+-- Test that checks if the evaluation of the Program prog1_IfThenElseLT works as expected
 test_prog1_IfThenElseLT : So (evalProg CompNoCom.prog1_IfThenElseLT == 200)
 test_prog1_IfThenElseLT = Oh
 
 test_prog2_IfThenElseLT : So (evalProg CompNoCom.prog2_IfThenElseLT == 100)
 test_prog2_IfThenElseLT = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_IfThenElseLTE works as expected
+-- Test that checks if the evaluation of the Program prog1_IfThenElseLTE works as expected
 test_prog1_IfThenElseLTE : So (evalProg CompNoCom.prog1_IfThenElseLTE == 200)
 test_prog1_IfThenElseLTE = Oh
 
 test_prog2_IfThenElseLTE : So (evalProg CompNoCom.prog2_IfThenElseLTE == 100)
 test_prog2_IfThenElseLTE = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_IfThenElseGT works as expected
+-- Test that checks if the evaluation of the Program prog1_IfThenElseGT works as expected
 test_prog1_IfThenElseGT : So (evalProg CompNoCom.prog1_IfThenElseGT == 100)
 test_prog1_IfThenElseGT = Oh
 
 test_prog2_IfThenElseGT : So (evalProg CompNoCom.prog2_IfThenElseGT == 200)
 test_prog2_IfThenElseGT = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_IfThenElseGTE works as expected
+-- Test that checks if the evaluation of the Program prog1_IfThenElseGTE works as expected
 test_prog1_IfThenElseGTE : So (evalProg CompNoCom.prog1_IfThenElseGTE == 100)
 test_prog1_IfThenElseGTE = Oh
 
 test_prog2_IfThenElseGTE : So (evalProg CompNoCom.prog2_IfThenElseGTE == 200)
 test_prog2_IfThenElseGTE = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_IfThenElseEQ works as expected
+-- Test that checks if the evaluation of the Program prog1_IfThenElseEQ works as expected
 test_prog1_IfThenElseEQ : So (evalProg CompNoCom.prog1_IfThenElseEQ == 200)
 test_prog1_IfThenElseEQ = Oh
 
 test_prog2_IfThenElseEQ : So (evalProg CompNoCom.prog2_IfThenElseEQ == 200)
 test_prog2_IfThenElseEQ = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_IfThenElseNEQ works as expected
+-- Test that checks if the evaluation of the Program prog1_IfThenElseNEQ works as expected
 test_prog1_IfThenElseNEQ : So (evalProg CompNoCom.prog1_IfThenElseNEQ == 100)
 test_prog1_IfThenElseNEQ = Oh
 
 test_prog2_IfThenElseNEQ : So (evalProg CompNoCom.prog2_IfThenElseNEQ == 100)
 test_prog2_IfThenElseNEQ = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_isEven works as expected
+-- Test that checks if the evaluation of the Program prog1_isEven works as expected
 test_prog1_isEven : So (evalProg CompNoCom.prog1_isEven == False)
 test_prog1_isEven = Oh
 
@@ -536,7 +536,7 @@ test_prog3_isEven = Oh
 test_prog4_isEven : So (evalProg CompNoCom.prog4_isEven == True)
 test_prog4_isEven = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_isOdd works as expected
+-- Test that checks if the evaluation of the Program prog1_isOdd works as expected
 test_prog1_isOdd : So (evalProg CompNoCom.prog1_isOdd == True)
 test_prog1_isOdd = Oh
 
@@ -549,25 +549,97 @@ test_prog3_isOdd = Oh
 test_prog4_isOdd : So (evalProg CompNoCom.prog4_isOdd == False)
 test_prog4_isOdd = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_fib works as expected
+-- Test that checks if the evaluation of the Program prog1_fib works as expected
 test_prog1_fib : So (evalProg CompNoCom.prog1_fib == 8)
 test_prog1_fib = Oh
 
--- Write a test that sees if the evaluation of the Program prog1_factorial works as expected
+-- Test that checks if the evaluation of the Program prog1_factorial works as expected
 test_prog1_factorial : So (evalProg CompNoCom.prog1_factorial == 3628800)
 test_prog1_factorial = Oh
 
 ---------------------Tests open program---------------------
--- Write a test that sees if the evaluation of the Program fibProg is equal to 8
-test6 : Bool
-test6 = evalOpenProg openprog1_fib == 8
+-- Test that checks if the evaluation of the Open Program openprog1_add1 and openprog2_add1 works as expected
+test_openprog1_add1 : So (evalOpenProg CompNoCom.openprog1_add1 == 200)
+test_openprog1_add1 = Oh
 
-test2 : Bool
-test2 = evalOpenProg openprog1_add2 == 4
+test_openprog2_add1 : So (evalOpenProg CompNoCom.openprog1_add2 == 120)
+test_openprog2_add1 = Oh
 
-test3 : Bool
-test3 = evalOpenProg openprog1_squareOrInput == 4
+--Test that checks if the evaluation of the Open Program openprog1_sub1 and openprog1_sub2 works as expected
+test_openprog1_sub1 : So (evalOpenProg CompNoCom.openprog1_sub1 == 0)
+test_openprog1_sub1 = Oh
 
+test_openprog2_sub1 : So (evalOpenProg CompNoCom.openprog1_sub2 == -80)
+test_openprog2_sub1 = Oh
+
+--Test that checks if the evaluation of the Open Program openprog1_mult1 and openprog1_mult2 works as expected
+test_openprog1_mult1 : So (evalOpenProg CompNoCom.openprog1_mult1 == 10000)
+test_openprog1_mult1 = Oh
+
+test_openprog2_mult1 : So (evalOpenProg CompNoCom.openprog1_mult2 == 2000)
+test_openprog2_mult1 = Oh
+
+--Test that checks if the evaluation of the Open Program IfThenElseLT works as expected
+test_openprog1_IfThenElseLT : So (evalOpenProg CompNoCom.openprog1_IfThenElseLT == 200)
+test_openprog1_IfThenElseLT = Oh
+
+--Test that checks if the evaluation of the Open Program IfThenElseLTE works as expected
+test_openprog1_IfThenElseLTE : So (evalOpenProg CompNoCom.openprog1_IfThenElseLTE == 100)
+test_openprog1_IfThenElseLTE = Oh
+
+--Test that checks if the evaluation of the Open Program IfThenElseGT works as expected
+test_openprog1_IfThenElseGT : So (evalOpenProg CompNoCom.openprog1_IfThenElseGT == 200)
+test_openprog1_IfThenElseGT = Oh
+
+--Test that checks if the evaluation of the Open Program IfThenElseGTE works as expected
+test_openprog1_IfThenElseGTE : So (evalOpenProg CompNoCom.openprog1_IfThenElseGTE == 100)
+test_openprog1_IfThenElseGTE = Oh
+
+--Test that checks if the evaluation of the Open Program IfThenElseEQ works as expected
+test_openprog1_IfThenElseEQ : So (evalOpenProg CompNoCom.openprog1_IfThenElseEQ == 100)
+test_openprog1_IfThenElseEQ = Oh
+
+--Test that checks if the evaluation of the Open Program IfThenElseNEQ works as expected
+test_openprog1_IfThenElseNEQ : So (evalOpenProg CompNoCom.openprog1_IfThenElseNEQ == 200)
+test_openprog1_IfThenElseNEQ = Oh
+
+--Test that checks if the evaluation of the Open Program isEven works as expected
+test_openprog1_isEven : So (evalOpenProg CompNoCom.openprog1_isEven == False)
+test_openprog1_isEven = Oh
+
+test_openprog2_isEven : So (evalOpenProg CompNoCom.openprog2_isEven == True)
+test_openprog2_isEven = Oh
+
+test_openprog3_isEven : So (evalOpenProg CompNoCom.openprog3_isEven == False)
+test_openprog3_isEven = Oh
+
+test_openprog4_isEven : So (evalOpenProg CompNoCom.openprog4_isEven == True)
+test_openprog4_isEven = Oh
+
+--Test that checks if the evaluation of the Open Program isOdd works as expected
+test_openprog1_isOdd : So (evalOpenProg CompNoCom.openprog1_isOdd == True)
+test_openprog1_isOdd = Oh
+
+test_openprog2_isOdd : So (evalOpenProg CompNoCom.openprog2_isOdd == False)
+test_openprog2_isOdd = Oh
+
+test_openprog3_isOdd : So (evalOpenProg CompNoCom.openprog3_isOdd == True)
+test_openprog3_isOdd = Oh
+
+test_openprog4_isOdd : So (evalOpenProg CompNoCom.openprog4_isOdd == False)
+test_openprog4_isOdd = Oh
+
+--Test that checks if the evaluation of the Open Program fib works as expected
+test_openprog1_fib : So (evalOpenProg CompNoCom.openprog1_fib == 8)
+test_openprog1_fib = Oh
+
+--Test that checks if the evaluation of the Open Program factorial works as expected
+test_openprog1_factorial : So (evalOpenProg CompNoCom.openprog1_fact == 120)
+test_openprog1_factorial = Oh
+
+--Test that checks if the evaluation of the Open Program openprog1_squareOrInput works as expected
+test_openprog1_squareOrInput : So (evalOpenProg CompNoCom.openprog1_squareOrInput == 4)
+test_openprog1_squareOrInput = Oh
 
 ---------------------Ackermann---------------------
 ackermann : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint
