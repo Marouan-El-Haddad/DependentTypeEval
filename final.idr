@@ -31,8 +31,6 @@ data Exp : (vEnv: Vect n TyExp) -> (fEnv: (TyExp, TyExp)) -> TyExp -> Type where
   ExpGreaterThan : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpGreaterThanEqual : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tbool
   ExpFuncCall: Exp vEnv (s,t) s -> Exp vEnv (s,t) t
---start med at skrive med simple programmer, og udvikle det mere
--- når man har variabler er dependent types mest relevant
 
 record FunDecl where
   constructor MkFunDecl
@@ -244,6 +242,10 @@ GreaterThan1 = MkFunDecl Tint Tbool (ExpGreaterThan (ExpVar (StopVar)) (ExpVal 1
 --Greater Than Equal function declaration function declaration
 GreaterThanEqual1 : FunDecl
 GreaterThanEqual1 = MkFunDecl Tint Tbool (ExpGreaterThanEqual (ExpVar (StopVar)) (ExpVal 100))
+
+-- Define a function that returns True if the input is greater than 10, and False otherwise
+isGreaterThanTen2 : FunDecl
+isGreaterThanTen2 = MkFunDecl Tint Tbool (ExpGreaterThan (ExpVar (StopVar)) (ExpVal 10))
 
 --Function call that returns the nth fibonacci number
 fib : FunDecl
@@ -461,185 +463,185 @@ openprog1_squareOrInput = MkOpenProgram squareOrInput Tint Tint 1 (ExpIfThenElse
 ---------------------Tests program---------------------
 
 -- Test that checks if the evaluation of the Program prog1_add1 works as expected
-test_prog1_add1 : So (evalProg CompNoCom.prog1_add1 == 103)
-test_prog1_add1 = Oh
+test_prog1_add1 : evalProg CompNoCom.prog1_add1 = 103
+test_prog1_add1 = Refl
 
-test_prog1_add2 : So (evalProg CompNoCom.prog2_add1 == 100)
-test_prog1_add2 = Oh
+test_prog1_add2 : evalProg CompNoCom.prog2_add1 = 100
+test_prog1_add2 = Refl
 
 -- Test that checks if the evaluation of the Program prog1_sub1 works as expected
-test_prog1_sub1 : So (evalProg CompNoCom.prog1_sub1 == -97)
-test_prog1_sub1 = Oh
+test_prog1_sub1 : evalProg CompNoCom.prog1_sub1 = -97
+test_prog1_sub1 = Refl
 
-test_prog2_sub1 : So (evalProg CompNoCom.prog2_sub1 == -100)
-test_prog2_sub1 = Oh
+test_prog2_sub1 : evalProg CompNoCom.prog2_sub1 = -100
+test_prog2_sub1 = Refl
 
 -- Test that checks if the evaluation of the Program prog1_mul1 works as expected
-test_prog1_mult1 : So (evalProg CompNoCom.prog1_mul1 == 300)
-test_prog1_mult1 = Oh
+test_prog1_mult1 : evalProg CompNoCom.prog1_mul1 = 300
+test_prog1_mult1 = Refl
 
-test_prog2_mult1 : So (evalProg CompNoCom.prog2_mul1 == 0)
-test_prog2_mult1 = Oh
+test_prog2_mult1 : evalProg CompNoCom.prog2_mul1 = 0
+test_prog2_mult1 = Refl
 
 -- Test that checks if the evaluation of the Program prog1_IfThenElseLT works as expected
-test_prog1_IfThenElseLT : So (evalProg CompNoCom.prog1_IfThenElseLT == 200)
-test_prog1_IfThenElseLT = Oh
+test_prog1_IfThenElseLT : evalProg CompNoCom.prog1_IfThenElseLT = 200
+test_prog1_IfThenElseLT = Refl
 
-test_prog2_IfThenElseLT : So (evalProg CompNoCom.prog2_IfThenElseLT == 100)
-test_prog2_IfThenElseLT = Oh
+test_prog2_IfThenElseLT : evalProg CompNoCom.prog2_IfThenElseLT = 100
+test_prog2_IfThenElseLT = Refl
 
 -- Test that checks if the evaluation of the Program prog1_IfThenElseLTE works as expected
-test_prog1_IfThenElseLTE : So (evalProg CompNoCom.prog1_IfThenElseLTE == 200)
-test_prog1_IfThenElseLTE = Oh
+test_prog1_IfThenElseLTE : evalProg CompNoCom.prog1_IfThenElseLTE = 200
+test_prog1_IfThenElseLTE = Refl
 
-test_prog2_IfThenElseLTE : So (evalProg CompNoCom.prog2_IfThenElseLTE == 100)
-test_prog2_IfThenElseLTE = Oh
+test_prog2_IfThenElseLTE : evalProg CompNoCom.prog2_IfThenElseLTE = 100
+test_prog2_IfThenElseLTE = Refl
 
 -- Test that checks if the evaluation of the Program prog1_IfThenElseGT works as expected
-test_prog1_IfThenElseGT : So (evalProg CompNoCom.prog1_IfThenElseGT == 100)
-test_prog1_IfThenElseGT = Oh
+test_prog1_IfThenElseGT : evalProg CompNoCom.prog1_IfThenElseGT = 100
+test_prog1_IfThenElseGT = Refl
 
-test_prog2_IfThenElseGT : So (evalProg CompNoCom.prog2_IfThenElseGT == 200)
-test_prog2_IfThenElseGT = Oh
+test_prog2_IfThenElseGT : evalProg CompNoCom.prog2_IfThenElseGT = 200
+test_prog2_IfThenElseGT = Refl
 
 -- Test that checks if the evaluation of the Program prog1_IfThenElseGTE works as expected
-test_prog1_IfThenElseGTE : So (evalProg CompNoCom.prog1_IfThenElseGTE == 100)
-test_prog1_IfThenElseGTE = Oh
+test_prog1_IfThenElseGTE : evalProg CompNoCom.prog1_IfThenElseGTE = 100
+test_prog1_IfThenElseGTE = Refl
 
-test_prog2_IfThenElseGTE : So (evalProg CompNoCom.prog2_IfThenElseGTE == 200)
-test_prog2_IfThenElseGTE = Oh
+test_prog2_IfThenElseGTE : evalProg CompNoCom.prog2_IfThenElseGTE = 200
+test_prog2_IfThenElseGTE = Refl
 
 -- Test that checks if the evaluation of the Program prog1_IfThenElseEQ works as expected
-test_prog1_IfThenElseEQ : So (evalProg CompNoCom.prog1_IfThenElseEQ == 200)
-test_prog1_IfThenElseEQ = Oh
+test_prog1_IfThenElseEQ : evalProg CompNoCom.prog1_IfThenElseEQ = 200
+test_prog1_IfThenElseEQ = Refl
 
-test_prog2_IfThenElseEQ : So (evalProg CompNoCom.prog2_IfThenElseEQ == 200)
-test_prog2_IfThenElseEQ = Oh
+test_prog2_IfThenElseEQ : evalProg CompNoCom.prog2_IfThenElseEQ = 200
+test_prog2_IfThenElseEQ = Refl
 
 -- Test that checks if the evaluation of the Program prog1_IfThenElseNEQ works as expected
-test_prog1_IfThenElseNEQ : So (evalProg CompNoCom.prog1_IfThenElseNEQ == 100)
-test_prog1_IfThenElseNEQ = Oh
+test_prog1_IfThenElseNEQ : evalProg CompNoCom.prog1_IfThenElseNEQ = 100
+test_prog1_IfThenElseNEQ = Refl
 
-test_prog2_IfThenElseNEQ : So (evalProg CompNoCom.prog2_IfThenElseNEQ == 100)
-test_prog2_IfThenElseNEQ = Oh
+test_prog2_IfThenElseNEQ : evalProg CompNoCom.prog2_IfThenElseNEQ = 100
+test_prog2_IfThenElseNEQ = Refl
 
 -- Test that checks if the evaluation of the Program prog1_isEven works as expected
-test_prog1_isEven : So (evalProg CompNoCom.prog1_isEven == False)
-test_prog1_isEven = Oh
+test_prog1_isEven : evalProg CompNoCom.prog1_isEven = False
+test_prog1_isEven = Refl
 
-test_prog2_isEven : So (evalProg CompNoCom.prog2_isEven == True)
-test_prog2_isEven = Oh
+test_prog2_isEven : evalProg CompNoCom.prog2_isEven = True
+test_prog2_isEven = Refl
 
-test_prog3_isEven : So (evalProg CompNoCom.prog3_isEven == False)
-test_prog3_isEven = Oh
+test_prog3_isEven : evalProg CompNoCom.prog3_isEven = False
+test_prog3_isEven = Refl
 
-test_prog4_isEven : So (evalProg CompNoCom.prog4_isEven == True)
-test_prog4_isEven = Oh
+test_prog4_isEven : evalProg CompNoCom.prog4_isEven = True
+test_prog4_isEven = Refl
 
 -- Test that checks if the evaluation of the Program prog1_isOdd works as expected
-test_prog1_isOdd : So (evalProg CompNoCom.prog1_isOdd == True)
-test_prog1_isOdd = Oh
+test_prog1_isOdd : evalProg CompNoCom.prog1_isOdd = True
+test_prog1_isOdd = Refl
 
-test_prog2_isOdd : So (evalProg CompNoCom.prog2_isOdd == False)
-test_prog2_isOdd = Oh
+test_prog2_isOdd : evalProg CompNoCom.prog2_isOdd = False
+test_prog2_isOdd = Refl
 
-test_prog3_isOdd : So (evalProg CompNoCom.prog3_isOdd == True)
-test_prog3_isOdd = Oh
+test_prog3_isOdd : evalProg CompNoCom.prog3_isOdd = True
+test_prog3_isOdd = Refl
 
-test_prog4_isOdd : So (evalProg CompNoCom.prog4_isOdd == False)
-test_prog4_isOdd = Oh
+test_prog4_isOdd : evalProg CompNoCom.prog4_isOdd = False
+test_prog4_isOdd = Refl
 
 -- Test that checks if the evaluation of the Program prog1_fib works as expected
-test_prog1_fib : So (evalProg CompNoCom.prog1_fib == 8)
-test_prog1_fib = Oh
+test_prog1_fib : evalProg CompNoCom.prog1_fib = 8
+test_prog1_fib = Refl
 
 -- Test that checks if the evaluation of the Program prog1_factorial works as expected
-test_prog1_factorial : So (evalProg CompNoCom.prog1_factorial == 3628800)
-test_prog1_factorial = Oh
+test_prog1_factorial : evalProg CompNoCom.prog1_factorial = 3628800
+test_prog1_factorial = Refl
 
 ---------------------Tests open program---------------------
 -- Test that checks if the evaluation of the Open Program openprog1_add1 and openprog2_add1 works as expected
-test_openprog1_add1 : So (evalOpenProg CompNoCom.openprog1_add1 == 200)
-test_openprog1_add1 = Oh
+test_openprog1_add1 : evalOpenProg CompNoCom.openprog1_add1 = 200
+test_openprog1_add1 = Refl
 
-test_openprog2_add1 : So (evalOpenProg CompNoCom.openprog1_add2 == 120)
-test_openprog2_add1 = Oh
+test_openprog2_add1 : evalOpenProg CompNoCom.openprog1_add2 = 120
+test_openprog2_add1 = Refl
 
 --Test that checks if the evaluation of the Open Program openprog1_sub1 and openprog1_sub2 works as expected
-test_openprog1_sub1 : So (evalOpenProg CompNoCom.openprog1_sub1 == 0)
-test_openprog1_sub1 = Oh
+test_openprog1_sub1 : evalOpenProg CompNoCom.openprog1_sub1 = 0
+test_openprog1_sub1 = Refl
 
-test_openprog2_sub1 : So (evalOpenProg CompNoCom.openprog1_sub2 == -80)
-test_openprog2_sub1 = Oh
+test_openprog2_sub1 : evalOpenProg CompNoCom.openprog1_sub2 = -80
+test_openprog2_sub1 = Refl
 
 --Test that checks if the evaluation of the Open Program openprog1_mult1 and openprog1_mult2 works as expected
-test_openprog1_mult1 : So (evalOpenProg CompNoCom.openprog1_mult1 == 10000)
-test_openprog1_mult1 = Oh
+test_openprog1_mult1 : evalOpenProg CompNoCom.openprog1_mult1 = 10000
+test_openprog1_mult1 = Refl
 
-test_openprog2_mult1 : So (evalOpenProg CompNoCom.openprog1_mult2 == 2000)
-test_openprog2_mult1 = Oh
+test_openprog2_mult1 : evalOpenProg CompNoCom.openprog1_mult2 = 2000
+test_openprog2_mult1 = Refl
 
 --Test that checks if the evaluation of the Open Program IfThenElseLT works as expected
-test_openprog1_IfThenElseLT : So (evalOpenProg CompNoCom.openprog1_IfThenElseLT == 200)
-test_openprog1_IfThenElseLT = Oh
+test_openprog1_IfThenElseLT : evalOpenProg CompNoCom.openprog1_IfThenElseLT = 200
+test_openprog1_IfThenElseLT = Refl
 
 --Test that checks if the evaluation of the Open Program IfThenElseLTE works as expected
-test_openprog1_IfThenElseLTE : So (evalOpenProg CompNoCom.openprog1_IfThenElseLTE == 100)
-test_openprog1_IfThenElseLTE = Oh
+test_openprog1_IfThenElseLTE : evalOpenProg CompNoCom.openprog1_IfThenElseLTE = 100
+test_openprog1_IfThenElseLTE = Refl
 
 --Test that checks if the evaluation of the Open Program IfThenElseGT works as expected
-test_openprog1_IfThenElseGT : So (evalOpenProg CompNoCom.openprog1_IfThenElseGT == 200)
-test_openprog1_IfThenElseGT = Oh
+test_openprog1_IfThenElseGT : evalOpenProg CompNoCom.openprog1_IfThenElseGT = 200
+test_openprog1_IfThenElseGT = Refl
 
 --Test that checks if the evaluation of the Open Program IfThenElseGTE works as expected
-test_openprog1_IfThenElseGTE : So (evalOpenProg CompNoCom.openprog1_IfThenElseGTE == 100)
-test_openprog1_IfThenElseGTE = Oh
+test_openprog1_IfThenElseGTE : evalOpenProg CompNoCom.openprog1_IfThenElseGTE = 100
+test_openprog1_IfThenElseGTE = Refl
 
 --Test that checks if the evaluation of the Open Program IfThenElseEQ works as expected
-test_openprog1_IfThenElseEQ : So (evalOpenProg CompNoCom.openprog1_IfThenElseEQ == 100)
-test_openprog1_IfThenElseEQ = Oh
+test_openprog1_IfThenElseEQ : evalOpenProg CompNoCom.openprog1_IfThenElseEQ = 100
+test_openprog1_IfThenElseEQ = Refl
 
 --Test that checks if the evaluation of the Open Program IfThenElseNEQ works as expected
-test_openprog1_IfThenElseNEQ : So (evalOpenProg CompNoCom.openprog1_IfThenElseNEQ == 200)
-test_openprog1_IfThenElseNEQ = Oh
+test_openprog1_IfThenElseNEQ : evalOpenProg CompNoCom.openprog1_IfThenElseNEQ = 200
+test_openprog1_IfThenElseNEQ = Refl
 
 --Test that checks if the evaluation of the Open Program isEven works as expected
-test_openprog1_isEven : So (evalOpenProg CompNoCom.openprog1_isEven == False)
-test_openprog1_isEven = Oh
+test_openprog1_isEven : evalOpenProg CompNoCom.openprog1_isEven = False
+test_openprog1_isEven = Refl
 
-test_openprog2_isEven : So (evalOpenProg CompNoCom.openprog2_isEven == True)
-test_openprog2_isEven = Oh
+test_openprog2_isEven : evalOpenProg CompNoCom.openprog2_isEven = True
+test_openprog2_isEven = Refl
 
-test_openprog3_isEven : So (evalOpenProg CompNoCom.openprog3_isEven == False)
-test_openprog3_isEven = Oh
+test_openprog3_isEven : evalOpenProg CompNoCom.openprog3_isEven = False
+test_openprog3_isEven = Refl
 
-test_openprog4_isEven : So (evalOpenProg CompNoCom.openprog4_isEven == True)
-test_openprog4_isEven = Oh
+test_openprog4_isEven : evalOpenProg CompNoCom.openprog4_isEven = True
+test_openprog4_isEven = Refl
 
 --Test that checks if the evaluation of the Open Program isOdd works as expected
-test_openprog1_isOdd : So (evalOpenProg CompNoCom.openprog1_isOdd == True)
-test_openprog1_isOdd = Oh
+test_openprog1_isOdd : evalOpenProg CompNoCom.openprog1_isOdd = True
+test_openprog1_isOdd = Refl
 
-test_openprog2_isOdd : So (evalOpenProg CompNoCom.openprog2_isOdd == False)
-test_openprog2_isOdd = Oh
+test_openprog2_isOdd : evalOpenProg CompNoCom.openprog2_isOdd = False
+test_openprog2_isOdd = Refl
 
-test_openprog3_isOdd : So (evalOpenProg CompNoCom.openprog3_isOdd == True)
-test_openprog3_isOdd = Oh
+test_openprog3_isOdd : evalOpenProg CompNoCom.openprog3_isOdd = True
+test_openprog3_isOdd = Refl
 
-test_openprog4_isOdd : So (evalOpenProg CompNoCom.openprog4_isOdd == False)
-test_openprog4_isOdd = Oh
+test_openprog4_isOdd : evalOpenProg CompNoCom.openprog4_isOdd = False
+test_openprog4_isOdd = Refl
 
 --Test that checks if the evaluation of the Open Program fib works as expected
-test_openprog1_fib : So (evalOpenProg CompNoCom.openprog1_fib == 8)
-test_openprog1_fib = Oh
+test_openprog1_fib : evalOpenProg CompNoCom.openprog1_fib = 8
+test_openprog1_fib = Refl
 
 --Test that checks if the evaluation of the Open Program factorial works as expected
-test_openprog1_factorial : So (evalOpenProg CompNoCom.openprog1_fact == 120)
-test_openprog1_factorial = Oh
+test_openprog1_factorial : evalOpenProg CompNoCom.openprog1_fact = 120
+test_openprog1_factorial = Refl
 
 --Test that checks if the evaluation of the Open Program openprog1_squareOrInput works as expected
-test_openprog1_squareOrInput : So (evalOpenProg CompNoCom.openprog1_squareOrInput == 4)
-test_openprog1_squareOrInput = Oh
+test_openprog1_squareOrInput : evalOpenProg CompNoCom.openprog1_squareOrInput = 4
+test_openprog1_squareOrInput = Refl
 
 ---------------------Ackermann---------------------
 ackermann : Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint -> Exp vEnv fEnv Tint
